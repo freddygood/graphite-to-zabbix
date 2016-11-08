@@ -140,7 +140,11 @@ class G2ZProxy(object):
         else:
             req = '{host}.{metric}'
 
-        req = req.format(host=metric['host'], metric=metric['metric'])
+	req = 'host.' + req
+
+        #req = req.format(host=metric['host'], metric=metric['metric'])
+	req = req.format(host=metric['host'].replace('.','_'), metric=metric['metric'])
+	
         req = self.aggregation_function.format(metric=req)
         req = urllib2.quote(req)
 
